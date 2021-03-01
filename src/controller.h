@@ -1,15 +1,23 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "snake.h"
+//Using SDL and standard IO
+#include <SDL.h>
+#include <SDL_image.h>
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#include "dot.h"
+#include "ltexture.h"
+#include "ltimer.h"
 
-class Controller {
- public:
-  void HandleInput(bool &running, Snake &snake) const;
+class Controller
+{
+    public:
 
- private:
-  void ChangeDirection(Snake &snake, Snake::Direction input,
-                       Snake::Direction opposite) const;
+    void handleEvent( SDL_Event& e, Dot &dot);
+
+    private:
 };
 
 #endif
