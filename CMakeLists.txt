@@ -9,8 +9,6 @@ project(SDL2Test)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
-#include(FindPkgConfig)
-
 find_package(SDL2 REQUIRED sdl2)
 find_package(SDL2_image REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} src)
