@@ -60,7 +60,7 @@ bool Renderer::loadMedia(LTexture &gDotTexture)
 	bool success = true;
 
 	//Load dot texture
-	if( !gDotTexture.loadFromFile( "Lesson0/src/dot.bmp" , this->gRenderer) )
+	if( !gDotTexture.loadFromFile( "/home/workspace/TemperatureRising/TemperatureRising/src/dot.bmp" , this->gRenderer) )
 	{
 		printf( "Failed to load dot texture!\n" );
 		success = false;

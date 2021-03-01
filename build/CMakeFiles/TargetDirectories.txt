@@ -1,0 +1,3 @@
+/home/workspace/TemperatureRising/TemperatureRising/build/CMakeFiles/rebuild_cache.dir
+/home/workspace/TemperatureRising/TemperatureRising/build/CMakeFiles/F_d_UP.dir
+/home/workspace/TemperatureRising/TemperatureRising/build/CMakeFiles/edit_cache.dir

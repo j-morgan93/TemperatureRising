@@ -1,0 +1,1 @@
+/usr/bin/g++-7  -std=c++17   CMakeFiles/F_d_UP.dir/src/main.cpp.o CMakeFiles/F_d_UP.dir/src/dot.cpp.o CMakeFiles/F_d_UP.dir/src/controller.cpp.o CMakeFiles/F_d_UP.dir/src/renderer.cpp.o CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o  -o F_d_UP -L/usr/lib/x86_64-linux-gnu  -lSDL2 /usr/lib/x86_64-linux-gnu/libSDL2_image.so 
