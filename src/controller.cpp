@@ -8,10 +8,10 @@ void Controller::handleEvent( SDL_Event& e, Dot &dot )
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP: dot.mVelY -= dot.DOT_VEL; break;
-            case SDLK_DOWN: dot.mVelY += dot.DOT_VEL; break;
-            case SDLK_LEFT: dot.mVelX -= dot.DOT_VEL; break;
-            case SDLK_RIGHT: dot.mVelX += dot.DOT_VEL; break;
+            case SDLK_UP: dot.setVelY(dot.getVelY() - dot.DOT_VEL); break;
+            case SDLK_DOWN: dot.setVelY(dot.getVelY() + dot.DOT_VEL); break;
+            case SDLK_LEFT: dot.setVelX(dot.getVelX() - dot.DOT_VEL); break;
+            case SDLK_RIGHT: dot.setVelX(dot.getVelX() + dot.DOT_VEL); break;
         }
     }
     //If a key was released
@@ -20,10 +20,10 @@ void Controller::handleEvent( SDL_Event& e, Dot &dot )
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP: dot.mVelY += dot.DOT_VEL; break;
-            case SDLK_DOWN: dot.mVelY -= dot.DOT_VEL; break;
-            case SDLK_LEFT: dot.mVelX += dot.DOT_VEL; break;
-            case SDLK_RIGHT: dot.mVelX -= dot.DOT_VEL; break;
+            case SDLK_UP: dot.setVelY(dot.getVelY() + dot.DOT_VEL); break;
+            case SDLK_DOWN: dot.setVelY(dot.getVelY() - dot.DOT_VEL); break;
+            case SDLK_LEFT: dot.setVelX(dot.getVelX() + dot.DOT_VEL); break;
+            case SDLK_RIGHT: dot.setVelX(dot.getVelX() - dot.DOT_VEL); break;
         }
     }
 }

@@ -36,8 +36,9 @@ int main(int argc, char *args[])
 			//Event handler
 			SDL_Event e;
 
-			//The dot that will be moving around on the screen
-			Dot dot;
+			//The dots that will be moving around on the screen
+			Dot dot(0,0,0,0);
+			Dot dot2(220,250,1,-1);
 
 			//While application is running
 			while (!quit)
@@ -58,16 +59,15 @@ int main(int argc, char *args[])
 
 				//Move the dot
 				dot.move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
+				dot2.move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
 
 				//Clear screen
-
-				//RenderObj.Render(dot);
-
 				SDL_SetRenderDrawColor(RenderObj.gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 				SDL_RenderClear(RenderObj.gRenderer);
 
 				//Render objects
 				dot.render(gDotTexture, RenderObj);
+				dot2.render(gDotTexture, RenderObj);
 
 				//Update screen
 				SDL_RenderPresent(RenderObj.gRenderer);
@@ -77,6 +77,9 @@ int main(int argc, char *args[])
 
 	//Free resources and close SDL
 	RenderObj.close(gDotTexture);
+
+	//Display temperature and asteroids avoided
+	std::cout << "Final Temperature: " << std::endl;
 
 	return 0;
 }

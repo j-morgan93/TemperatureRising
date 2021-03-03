@@ -6,6 +6,7 @@
 #include "ltimer.h"
 #include "renderer.h"
 
+//decided to forward declare here, oops!
 class Renderer;
 
 //Texture wrapper class

@@ -11,8 +11,8 @@
 #include "ltexture.h"
 #include "ltimer.h"
 
+//decided to forward declare here, oops!
 class LTexture;
-
 class Dot;
 
 class Renderer

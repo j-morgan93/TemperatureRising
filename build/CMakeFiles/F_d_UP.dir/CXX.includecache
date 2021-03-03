@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/workspace/TemperatureRising/TemperatureRising/src/controller.cpp
-controller.h
-/home/workspace/TemperatureRising/TemperatureRising/src/controller.h
-
 /home/workspace/TemperatureRising/TemperatureRising/src/controller.h
 SDL.h
 -
@@ -28,10 +24,6 @@ ltexture.h
 ltimer.h
 /home/workspace/TemperatureRising/TemperatureRising/src/ltimer.h
 
-/home/workspace/TemperatureRising/TemperatureRising/src/dot.cpp
-dot.h
-/home/workspace/TemperatureRising/TemperatureRising/src/dot.h
-
 /home/workspace/TemperatureRising/TemperatureRising/src/dot.h
 vector
 -
@@ -43,10 +35,6 @@ ltexture.h
 /home/workspace/TemperatureRising/TemperatureRising/src/ltexture.h
 renderer.h
 /home/workspace/TemperatureRising/TemperatureRising/src/renderer.h
-
-/home/workspace/TemperatureRising/TemperatureRising/src/ltexture.cpp
-ltexture.h
-/home/workspace/TemperatureRising/TemperatureRising/src/ltexture.h
 
 /home/workspace/TemperatureRising/TemperatureRising/src/ltexture.h
 dot.h
@@ -95,10 +83,6 @@ renderer.h
 /home/workspace/TemperatureRising/TemperatureRising/src/renderer.h
 controller.h
 /home/workspace/TemperatureRising/TemperatureRising/src/controller.h
-
-/home/workspace/TemperatureRising/TemperatureRising/src/renderer.cpp
-renderer.h
-/home/workspace/TemperatureRising/TemperatureRising/src/renderer.h
 
 /home/workspace/TemperatureRising/TemperatureRising/src/renderer.h
 SDL.h
