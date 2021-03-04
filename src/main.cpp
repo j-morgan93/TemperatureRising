@@ -36,9 +36,27 @@ int main(int argc, char *args[])
 			//Event handler
 			SDL_Event e;
 
+			//in a seperate thread, start the timer; the level thread has access to this timer
+			//LTimer time;
+
+			//based on the timer, calculate the level from seperate thread;
+			int level = 5;
+		
+
 			//The dots that will be moving around on the screen
-			Dot dot(0,0,0,0);
-			Dot dot2(220,250,1,-1);
+			Dot dot(RenderObj.SCREEN_WIDTH/2,RenderObj.SCREEN_HEIGHT - 100,0,0);
+
+			//AstObj vector
+			std::vector<Dot> AstVec{};
+
+			//Loop for instantiating a bunch of Asteroids
+			for (int i = 0; i < level; i++)
+			{
+				int origin = rand() % RenderObj.SCREEN_WIDTH;
+				//std::cout << "origin is: " << origin << std::endl;
+				AstVec.emplace_back(origin, 0, 0, 1);
+				//std::cout << "AstVec id: " << &AstVec[i] << std::endl;
+			}
 
 			//While application is running
 			while (!quit)
@@ -57,9 +75,27 @@ int main(int argc, char *args[])
 					controller.handleEvent(e, dot);
 				}
 
-				//Move the dot
+				//Move the dot controlled by user
 				dot.move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
-				dot2.move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
+				
+
+				for (int i = 0; i < level; i++)
+				{
+					if(AstVec[i].getPosY() >= RenderObj.SCREEN_HEIGHT -20) {
+						AstVec[i].setPosX(rand() % RenderObj.getScreenWidth());
+						AstVec[i].setPosY(0);
+					}
+					//move the asteroids
+					AstVec[i].move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
+
+					//Check for Collision
+					if (RenderObj.CheckCollision(dot.Collider, AstVec[i].Collider)) {
+						AstVec[i].setPosX(rand() % RenderObj.getScreenWidth());
+						AstVec[i].setPosY(0);
+						std::cout << "We've F'd UP!" << std::endl;
+					}
+				}
+
 
 				//Clear screen
 				SDL_SetRenderDrawColor(RenderObj.gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -67,7 +103,11 @@ int main(int argc, char *args[])
 
 				//Render objects
 				dot.render(gDotTexture, RenderObj);
-				dot2.render(gDotTexture, RenderObj);
+				for (int i = 0; i < level; i++)
+				{
+					//mov the asteroids
+					AstVec[i].render(gDotTexture, RenderObj);
+				}
 
 				//Update screen
 				SDL_RenderPresent(RenderObj.gRenderer);

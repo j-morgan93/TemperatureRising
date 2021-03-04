@@ -54,6 +54,9 @@ public:
         KEY_PRESS_SURFACE_TOTAL
     };
 
+    //Collision checker function --this should check one object against a vector of SDL_Rect...
+    bool CheckCollision(SDL_Rect a, SDL_Rect b);
+
 private:
     
 

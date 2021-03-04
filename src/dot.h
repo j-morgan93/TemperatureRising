@@ -43,7 +43,10 @@ class Dot
 		//Shows the dot on the screen
 		void render(LTexture &gDotTexture, Renderer &RenderObj);
 
-    private:
+		//The Collision Box
+		SDL_Rect Collider;
+
+	private:
 
 		//The X and Y offsets of the dot
 		int mPosX=0;
@@ -53,7 +56,6 @@ class Dot
 		int mVelX=0;
 		int mVelY=0;
 
-		//The Collision Box
 
 
 };

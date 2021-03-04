@@ -92,3 +92,33 @@ void Renderer::Render(Dot const dot) {
   SDL_RenderClear(gRenderer);
 }
 
+bool Renderer::CheckCollision(SDL_Rect a, SDL_Rect b)
+{
+	//Construct tthe rectangle sides
+	int lA, lB;
+	int rA, rB;
+	int tA, tB;
+	int bA, bB;
+
+	//define edges of A
+	lA = a.x;
+	rA = a.x + a.w;
+	tA = a.y;
+	bA =  a.y + a.h;
+
+	//define edges of B
+	lB = b.x;
+	rB = b.x + b.w;
+	tB = b.y;
+	bB =  b.y + b.h;
+
+	//checking for bouding boxes collision with the separating axis test(s).
+	if (lA >= rB) {return false;}
+	if (bA <= tB) {return false;}
+	if (rA <= lB) {return false;}
+	if (tA >= bB) {return false;}
+
+	//std::cout<< "Collision! You F'd UP!" <<std::endl;
+	return true;
+}
+
