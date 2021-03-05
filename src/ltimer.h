@@ -2,45 +2,74 @@
 #define LTIMER_H
 
 //Using SDL and standard IO
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
 #include <iostream>
 #include <string>
-#include "dot.h"
-#include "ltexture.h"
-#include "ltimer.h"
+#include <mutex>
+#include <vector>
+#include <thread>
+#include <deque>
+#include <algorithm>
+#include <iostream>
+#include <chrono>
+#include <condition_variable>
 
-//The application time based timer
+/* This MessageQueue is taken from the CPPND-Concurrent-Traffic-Simulation Project submission */
+template <class T>
+class MessageQueue
+{
+	public:
+
+	//receives a message for either spawnmax or spawnfreq
+	T receive();
+
+	//sends a message for either spawnmax or spawnfreq
+	void send(T &&msg);
+
+	private:
+
+	std::deque<T> queue_;
+	std::condition_variable condition_;
+	std::mutex mutex_;
+
+};
+
+//This is the timer class that tkaes care of timing thingssss
 class LTimer
 {
-    public:
-		//Initializes variables
-		LTimer();
+public:
+    //Constructor of the Ltimer class
+    LTimer();
 
-		//The various clock actions
-		void start();
-		void stop();
-		void pause();
-		void unpause();
+    //Deconstructor of the LTimer class
+    ~LTimer();
 
-		//Gets the timer's time
-		Uint32 getTicks();
+    //sends a message of when to spawn
+    void spawnFrequency();
 
-		//Checks the status of the timer
-		bool isStarted();
-		bool isPaused();
+    //send a maximum number that can be on screen
+    void spawnMax();
 
-    private:
-		//The clock time when the timer started
-		Uint32 mStartTicks;
+	//get max number of asteroids that can be spawned
+	int getMax() {return max;}
 
-		//The ticks stored when the timer was paused
-		Uint32 mPausedTicks;
+	//Spawn phase signal type
+	enum SpawnPhase {spawn, nospawn};
 
-		//The timer status
-		bool mPaused;
-		bool mStarted;
+	//get current spawn phase
+	SpawnPhase getCurrentPhase() {return currentPhase;}
+
+private:
+
+	MessageQueue<SpawnPhase> _spawnQueue;
+
+    //this is the spawn signal
+    SpawnPhase currentPhase;
+
+    //this is the maximum number that can be spawned;
+    int max;
+
+	//in a seperate thread, start the timer; the level thread has access to this timer
+	std::vector<std::thread> threads;
 };
 
 #endif

@@ -204,6 +204,33 @@ src/ltexture.cpp.s:
 	$(MAKE) -f CMakeFiles/F_d_UP.dir/build.make CMakeFiles/F_d_UP.dir/src/ltexture.cpp.s
 .PHONY : src/ltexture.cpp.s
 
+src/ltimer.o: src/ltimer.cpp.o
+
+.PHONY : src/ltimer.o
+
+# target to build an object file
+src/ltimer.cpp.o:
+	$(MAKE) -f CMakeFiles/F_d_UP.dir/build.make CMakeFiles/F_d_UP.dir/src/ltimer.cpp.o
+.PHONY : src/ltimer.cpp.o
+
+src/ltimer.i: src/ltimer.cpp.i
+
+.PHONY : src/ltimer.i
+
+# target to preprocess a source file
+src/ltimer.cpp.i:
+	$(MAKE) -f CMakeFiles/F_d_UP.dir/build.make CMakeFiles/F_d_UP.dir/src/ltimer.cpp.i
+.PHONY : src/ltimer.cpp.i
+
+src/ltimer.s: src/ltimer.cpp.s
+
+.PHONY : src/ltimer.s
+
+# target to generate assembly for a file
+src/ltimer.cpp.s:
+	$(MAKE) -f CMakeFiles/F_d_UP.dir/build.make CMakeFiles/F_d_UP.dir/src/ltimer.cpp.s
+.PHONY : src/ltimer.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -276,6 +303,9 @@ help:
 	@echo "... src/ltexture.o"
 	@echo "... src/ltexture.i"
 	@echo "... src/ltexture.s"
+	@echo "... src/ltimer.o"
+	@echo "... src/ltimer.i"
+	@echo "... src/ltimer.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

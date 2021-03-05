@@ -23,6 +23,7 @@ CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_gamecontroller
 CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_gesture.h
 CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_haptic.h
 CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_hints.h
+CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_image.h
 CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_joystick.h
 CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_keyboard.h
 CMakeFiles/F_d_UP.dir/src/controller.cpp.o: /usr/include/SDL2/SDL_keycode.h
@@ -72,6 +73,7 @@ CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_gamecontroller.h
 CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_gesture.h
 CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_haptic.h
 CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_hints.h
+CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_image.h
 CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_joystick.h
 CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_keyboard.h
 CMakeFiles/F_d_UP.dir/src/dot.cpp.o: /usr/include/SDL2/SDL_keycode.h
@@ -121,6 +123,7 @@ CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_gamecontroller.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_gesture.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_haptic.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_hints.h
+CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_image.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_joystick.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_keyboard.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_keycode.h
@@ -148,6 +151,9 @@ CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_version.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/F_d_UP.dir/src/ltexture.cpp.o: /usr/include/SDL2/close_code.h
+
+CMakeFiles/F_d_UP.dir/src/ltimer.cpp.o: ../src/ltimer.cpp
+CMakeFiles/F_d_UP.dir/src/ltimer.cpp.o: ../src/ltimer.h
 
 CMakeFiles/F_d_UP.dir/src/main.cpp.o: ../src/controller.h
 CMakeFiles/F_d_UP.dir/src/main.cpp.o: ../src/dot.h

@@ -35,16 +35,18 @@ int main(int argc, char *args[])
 
 			//Event handler
 			SDL_Event e;
+			
+			//The timer for everything - may want to make a separate simulate() function to run the thread and initiate earlier
+			LTimer Timer;
 
-			//in a seperate thread, start the timer; the level thread has access to this timer
-			//LTimer time;
-
-			//based on the timer, calculate the level from seperate thread;
-			int level = 5;
+			//placing the timer function process in a separate thread
+			//threads.emplace_back(std::thread(LTimer.spawnFrequency()));
 		
-
 			//The dots that will be moving around on the screen
 			Dot dot(RenderObj.SCREEN_WIDTH/2,RenderObj.SCREEN_HEIGHT - 100,0,0);
+
+			//level dummy value;
+			int level = 1;
 
 			//AstObj vector
 			std::vector<Dot> AstVec{};
@@ -79,7 +81,7 @@ int main(int argc, char *args[])
 				dot.move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
 				
 
-				for (int i = 0; i < level; i++)
+				for (int i = 0; i < Timer.getMax(); i++)
 				{
 					if(AstVec[i].getPosY() >= RenderObj.SCREEN_HEIGHT -20) {
 						AstVec[i].setPosX(rand() % RenderObj.getScreenWidth());
@@ -96,14 +98,13 @@ int main(int argc, char *args[])
 					}
 				}
 
-
 				//Clear screen
 				SDL_SetRenderDrawColor(RenderObj.gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 				SDL_RenderClear(RenderObj.gRenderer);
 
 				//Render objects
 				dot.render(gDotTexture, RenderObj);
-				for (int i = 0; i < level; i++)
+				for (int i = 0; i < Timer.getMax(); i++)
 				{
 					//mov the asteroids
 					AstVec[i].render(gDotTexture, RenderObj);
@@ -112,6 +113,8 @@ int main(int argc, char *args[])
 				//Update screen
 				SDL_RenderPresent(RenderObj.gRenderer);
 			}
+
+			//threads[0].join();
 		}
 	}
 
