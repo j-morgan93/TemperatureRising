@@ -14,11 +14,11 @@ void MessageQueue<T>::send(T &&msg)
 
 LTimer::LTimer()
 {
-    //start the timer upon declaration;
-    auto t1 = std::chrono::high_resolution_clock::now();
-    max = 1;
+    
+    max = 0;
     std::cout << " Timer Started!: "  << std::endl;
-    threads.emplace_back(std::thread(&LTimer::spawnFrequency,this));
+    t1 = std::chrono::high_resolution_clock::now();
+    //threads.emplace_back(std::thread(&LTimer::spawnFrequency,this));
 
 }
 
@@ -44,9 +44,48 @@ void LTimer::spawnFrequency()
     }
 }
 
+//execute the virtual function for deciding how many bodies can be spawned.
+void LTimer::simulate()
+{
+    threads.emplace_back(std::thread (&LTimer::spawnMax, this));
+}
+
 void LTimer::spawnMax()
 {
+       
+    while (true)
+    {
+        auto t2 = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
 
+        //std::cout << quit << std::endl;
+        if (quit == true)
+        {
+            return;
+        }
+        else
+        {
+            //std::cout << "duration" << duration <<std::endl;
+            if (duration < 7)
+            {
+                max = 0;
+                std::cout << "Max: " << max << std::endl;
+            }
+            else if (duration >=7 && duration < 20)
+            {
+                max = 1;
+                std::cout << "Max: " << max << std::endl;
+            }
+            else {
+                max = 2;
+                std::cout << "Max: " << max << std::endl;
+            }
+            std::this_thread::sleep_for(std::chrono::seconds(2));
+        }
+        std::cout << "Hey" << std::endl;
+        
+    }
+    return;
 }
 
 LTimer::~LTimer()
@@ -55,4 +94,5 @@ LTimer::~LTimer()
     std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
         t.join();
     });
+
 }

@@ -1,6 +1,7 @@
 //Using SDL and standard IO
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL/SDL_thread.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -30,8 +31,6 @@ int main(int argc, char *args[])
 		}
 		else
 		{
-			//Main loop flag
-			bool quit = false;
 
 			//Event handler
 			SDL_Event e;
@@ -39,8 +38,9 @@ int main(int argc, char *args[])
 			//The timer for everything - may want to make a separate simulate() function to run the thread and initiate earlier
 			LTimer Timer;
 
-			//placing the timer function process in a separate thread
-			//threads.emplace_back(std::thread(LTimer.spawnFrequency()));
+			Timer.simulate();
+
+			//SDL_Thread *timerthread = SDL_CreateThread(LTimer::spawnMax, "Timerthread",Timer.quit);
 		
 			//The dots that will be moving around on the screen
 			Dot dot(RenderObj.SCREEN_WIDTH/2,RenderObj.SCREEN_HEIGHT - 100,0,0);
@@ -51,17 +51,8 @@ int main(int argc, char *args[])
 			//AstObj vector
 			std::vector<Dot> AstVec{};
 
-			//Loop for instantiating a bunch of Asteroids
-			for (int i = 0; i < level; i++)
-			{
-				int origin = rand() % RenderObj.SCREEN_WIDTH;
-				//std::cout << "origin is: " << origin << std::endl;
-				AstVec.emplace_back(origin, 0, 0, 1);
-				//std::cout << "AstVec id: " << &AstVec[i] << std::endl;
-			}
-
 			//While application is running
-			while (!quit)
+			while (!Timer.getQuit())
 			{
 				Controller controller;
 				//Handle events on queue
@@ -70,32 +61,47 @@ int main(int argc, char *args[])
 					//User requests quit
 					if (e.type == SDL_QUIT)
 					{
-						quit = true;
+						Timer.setQuit();
 					}
 
 					//Handle input for the dot
 					controller.handleEvent(e, dot);
 				}
+				if (AstVec.size() < Timer.getMax()) //Loop for instantiating a bunch of Asteroids
+				{
+					std::cout << "Smaller!" << std::endl;
+					int origin = rand() % RenderObj.SCREEN_WIDTH;
+					//std::cout << "origin is: " << origin << std::endl;
+					AstVec.emplace_back(origin, 0, 0, 1);
+					//std::cout << "AstVec id: " << &AstVec[i] << std::endl;
+				}
 
 				//Move the dot controlled by user
 				dot.move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
-				
+				//move the asteroids
+				for (unsigned i = 0; i < AstVec.size(); i++)
+				{
+					AstVec[i].move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
+				}
 
-				for (int i = 0; i < Timer.getMax(); i++)
+				//check for out of bounds movement.
+				std::vector<int> delv;
+				for (unsigned i = 0; i < AstVec.size(); i++)
 				{
 					if(AstVec[i].getPosY() >= RenderObj.SCREEN_HEIGHT -20) {
-						AstVec[i].setPosX(rand() % RenderObj.getScreenWidth());
-						AstVec[i].setPosY(0);
+						delv.push_back(i);
 					}
-					//move the asteroids
-					AstVec[i].move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
 
 					//Check for Collision
 					if (RenderObj.CheckCollision(dot.Collider, AstVec[i].Collider)) {
-						AstVec[i].setPosX(rand() % RenderObj.getScreenWidth());
-						AstVec[i].setPosY(0);
+						delv.push_back(i);
 						std::cout << "We've F'd UP!" << std::endl;
 					}
+				}
+
+				//delete the affect Asteroid bodies from the vector
+				for (unsigned i=0; i< delv.size(); i++) {
+					AstVec.erase(AstVec.begin() + delv[i]);
 				}
 
 				//Clear screen
@@ -104,7 +110,7 @@ int main(int argc, char *args[])
 
 				//Render objects
 				dot.render(gDotTexture, RenderObj);
-				for (int i = 0; i < Timer.getMax(); i++)
+				for (unsigned i = 0; i < AstVec.size(); i++)
 				{
 					//mov the asteroids
 					AstVec[i].render(gDotTexture, RenderObj);
@@ -113,7 +119,7 @@ int main(int argc, char *args[])
 				//Update screen
 				SDL_RenderPresent(RenderObj.gRenderer);
 			}
-
+			//SDL_WaitThread(timerthread, NULL);
 			//threads[0].join();
 		}
 	}

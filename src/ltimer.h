@@ -3,6 +3,7 @@
 
 //Using SDL and standard IO
 #include <iostream>
+#include "SDL.h"
 #include <string>
 #include <mutex>
 #include <vector>
@@ -46,19 +47,34 @@ public:
     //sends a message of when to spawn
     void spawnFrequency();
 
-    //send a maximum number that can be on screen
-    void spawnMax();
-
 	//get max number of asteroids that can be spawned
 	int getMax() {return max;}
+
+	//get Quit flag
+	bool getQuit() {return quit;}
+
+	//set Quitflag
+	void setQuit() {quit = true;}
+
+	//simulate the spawncyclee
+	void simulate();
 
 	//Spawn phase signal type
 	enum SpawnPhase {spawn, nospawn};
 
 	//get current spawn phase
 	SpawnPhase getCurrentPhase() {return currentPhase;}
-
+	
 private:
+
+    //send a maximum number that can be on screen
+    void spawnMax();
+
+	//quit flag
+	bool quit = false;
+
+	//clock for timing when to change the game state
+	std::chrono::time_point<std::chrono::high_resolution_clock> t1;
 
 	MessageQueue<SpawnPhase> _spawnQueue;
 

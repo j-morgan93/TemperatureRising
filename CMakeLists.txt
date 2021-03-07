@@ -11,8 +11,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 find_package(SDL2 REQUIRED sdl2)
 find_package(SDL2_image REQUIRED)
+#find_package(SDL_thread REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} src)
 
 add_executable(F_d_UP src/main.cpp src/dot.cpp src/controller.cpp src/ltimer.cpp src/renderer.cpp src/ltexture.cpp)
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-target_link_libraries(F_d_UP ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} )
+target_link_libraries(F_d_UP ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
