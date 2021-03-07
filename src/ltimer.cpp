@@ -76,18 +76,18 @@ void LTimer::spawnMax()
                 max = 1;
                 //std::cout << "Level UP!: " << max << std::endl;
             }
-            else if (duration >=20 && duration < 50)
+            else if (duration >=20 && duration < 0)
             {
                 max = 2;
                 //std::cout << "Level UP!: " << max << std::endl;
             }
-            else if (duration >=50 && duration < 110)
+            else if (duration >=0 && duration < 60)
             {
-                max = 3;
+                max = 4;
                 //std::cout << "Level UP!: " << max << std::endl;
             }
             else {
-                max = 4;
+                max = 8;
                 //std::cout << "Level UP!: " << max << std::endl;
             }
             std::this_thread::sleep_for(std::chrono::seconds(2));

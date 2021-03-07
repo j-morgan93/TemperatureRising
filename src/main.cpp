@@ -107,7 +107,7 @@ int main(int argc, char *args[])
 				}
 
 				//Clear screen
-				SDL_SetRenderDrawColor(RenderObj.gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				SDL_SetRenderDrawColor(RenderObj.gRenderer, 0, 0, 0, 0);
 				SDL_RenderClear(RenderObj.gRenderer);
 
 				//Render objects
@@ -115,7 +115,7 @@ int main(int argc, char *args[])
 				for (unsigned i = 0; i < AstVec.size(); i++)
 				{
 					//mov the asteroids
-					AstVec[i].render(gDotTexture, RenderObj);
+					AstVec[i].render(gAstTexture, RenderObj);
 				}
 
 				//Update screen
@@ -126,7 +126,7 @@ int main(int argc, char *args[])
 	}
 
 	//Free resources and close SDL
-	RenderObj.close(gDotTexture);
+	RenderObj.close(gAstTexture);
 	RenderObj.close(gM2020Texture);
 
 	//Display temperature and asteroids avoided
