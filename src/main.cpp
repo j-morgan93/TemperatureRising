@@ -14,7 +14,8 @@
 
 int main(int argc, char *args[])
 {
-	LTexture gDotTexture;
+	LTexture gAstTexture;
+	LTexture gM2020Texture;
 	Renderer RenderObj;
 
 	//Start up SDL and create window
@@ -25,13 +26,18 @@ int main(int argc, char *args[])
 	else
 	{
 		//Load media
-		if (!RenderObj.loadMedia(gDotTexture))
+		if (!RenderObj.loadMedia("/home/workspace/TemperatureRising/TemperatureRising/src/asteroid.bmp" ,gAstTexture))
+		{
+			printf("Failed to load media!\n");
+		}
+		if (!RenderObj.loadMedia("/home/workspace/TemperatureRising/TemperatureRising/src/m2020_1.bmp" ,gM2020Texture))
 		{
 			printf("Failed to load media!\n");
 		}
 		else
 		{
 
+			/* Initializing required components */
 			//Event handler
 			SDL_Event e;
 			
@@ -39,14 +45,9 @@ int main(int argc, char *args[])
 			LTimer Timer;
 
 			Timer.simulate();
-
-			//SDL_Thread *timerthread = SDL_CreateThread(LTimer::spawnMax, "Timerthread",Timer.quit);
 		
 			//The dots that will be moving around on the screen
 			Dot dot(RenderObj.SCREEN_WIDTH/2,RenderObj.SCREEN_HEIGHT - 100,0,0);
-
-			//level dummy value;
-			int level = 1;
 
 			//AstObj vector
 			std::vector<Dot> AstVec{};
@@ -67,13 +68,13 @@ int main(int argc, char *args[])
 					//Handle input for the dot
 					controller.handleEvent(e, dot);
 				}
-				if (AstVec.size() < Timer.getMax()) //Loop for instantiating a bunch of Asteroids
+				//Loop for instantiating a bunch of Asteroids based on Max
+				if (AstVec.size() < Timer.getMax()) 
 				{
-					std::cout << "Smaller!" << std::endl;
+					
 					int origin = rand() % RenderObj.SCREEN_WIDTH;
-					//std::cout << "origin is: " << origin << std::endl;
 					AstVec.emplace_back(origin, 0, 0, 1);
-					//std::cout << "AstVec id: " << &AstVec[i] << std::endl;
+					
 				}
 
 				//Move the dot controlled by user
@@ -90,12 +91,13 @@ int main(int argc, char *args[])
 				{
 					if(AstVec[i].getPosY() >= RenderObj.SCREEN_HEIGHT -20) {
 						delv.push_back(i);
+						Timer.setscore();
 					}
 
 					//Check for Collision
-					if (RenderObj.CheckCollision(dot.Collider, AstVec[i].Collider)) {
+					if (RenderObj.CheckCollision(dot, AstVec[i])) {
 						delv.push_back(i);
-						std::cout << "We've F'd UP!" << std::endl;
+						//std::cout << "We've F'd UP!" << std::endl;
 					}
 				}
 
@@ -109,7 +111,7 @@ int main(int argc, char *args[])
 				SDL_RenderClear(RenderObj.gRenderer);
 
 				//Render objects
-				dot.render(gDotTexture, RenderObj);
+				dot.render(gM2020Texture, RenderObj);
 				for (unsigned i = 0; i < AstVec.size(); i++)
 				{
 					//mov the asteroids
@@ -119,13 +121,13 @@ int main(int argc, char *args[])
 				//Update screen
 				SDL_RenderPresent(RenderObj.gRenderer);
 			}
-			//SDL_WaitThread(timerthread, NULL);
-			//threads[0].join();
+
 		}
 	}
 
 	//Free resources and close SDL
 	RenderObj.close(gDotTexture);
+	RenderObj.close(gM2020Texture);
 
 	//Display temperature and asteroids avoided
 	std::cout << "Final Temperature: " << std::endl;

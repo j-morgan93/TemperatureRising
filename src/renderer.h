@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <cstring>
 #include "dot.h"
 #include "ltexture.h"
 #include "ltimer.h"
@@ -23,10 +24,13 @@ public:
     bool init();
 
     //Loads media
-    bool loadMedia(LTexture &gDotTexture);
+    bool loadMedia(std::string path, LTexture &gDotTexture);
 
     //Frees media and shuts down SDL
     void close(LTexture &gDotTexture);
+
+    //Updates the window title with vehicle temp and score
+    //void UpdateTitle(int &a, int &t);
 
     void Render(Dot const dot);
 
@@ -55,7 +59,8 @@ public:
     };
 
     //Collision checker function --this should check one object against a vector of SDL_Rect...
-    bool CheckCollision(SDL_Rect a, SDL_Rect b);
+    bool CheckCollision(Dot &a, Dot &b);
+
 
 private:
     

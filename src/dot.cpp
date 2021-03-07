@@ -46,6 +46,12 @@ void Dot::move(const int width, const int height)
     Collider.y = mPosY;
 }
 
+void Dot::tempup()
+{
+    temp+= 15;
+    std::cout << "We've F'd Up - the tempreature is now: " << temp << "°F!" <<std::endl;
+}
+
 void Dot::render(LTexture &gDotTexture, Renderer &RenderObj)
 {
     //Show the dot

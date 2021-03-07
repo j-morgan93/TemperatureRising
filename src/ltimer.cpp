@@ -14,7 +14,7 @@ void MessageQueue<T>::send(T &&msg)
 
 LTimer::LTimer()
 {
-    
+    score = 0;
     max = 0;
     std::cout << " Timer Started!: "  << std::endl;
     t1 = std::chrono::high_resolution_clock::now();
@@ -69,21 +69,30 @@ void LTimer::spawnMax()
             if (duration < 7)
             {
                 max = 0;
-                std::cout << "Max: " << max << std::endl;
+                //std::cout << "Level UP!: " << max << std::endl;
             }
             else if (duration >=7 && duration < 20)
             {
                 max = 1;
-                std::cout << "Max: " << max << std::endl;
+                //std::cout << "Level UP!: " << max << std::endl;
+            }
+            else if (duration >=20 && duration < 50)
+            {
+                max = 2;
+                //std::cout << "Level UP!: " << max << std::endl;
+            }
+            else if (duration >=50 && duration < 110)
+            {
+                max = 3;
+                //std::cout << "Level UP!: " << max << std::endl;
             }
             else {
-                max = 2;
-                std::cout << "Max: " << max << std::endl;
+                max = 4;
+                //std::cout << "Level UP!: " << max << std::endl;
             }
             std::this_thread::sleep_for(std::chrono::seconds(2));
         }
-        std::cout << "Hey" << std::endl;
-        
+                
     }
     return;
 }

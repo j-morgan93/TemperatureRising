@@ -56,6 +56,9 @@ public:
 	//set Quitflag
 	void setQuit() {quit = true;}
 
+	//set score
+	void setscore() {score++;}
+
 	//simulate the spawncyclee
 	void simulate();
 
@@ -83,6 +86,9 @@ private:
 
     //this is the maximum number that can be spawned;
     int max;
+
+	//this is the score!
+	int score;
 
 	//in a seperate thread, start the timer; the level thread has access to this timer
 	std::vector<std::thread> threads;

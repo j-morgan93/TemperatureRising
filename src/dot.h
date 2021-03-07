@@ -23,7 +23,7 @@ class Dot
 		static const int DOT_HEIGHT = 20;
 
 		//Maximum axis velocity of the dot
-		static const int DOT_VEL = 1;
+		static const int DOT_VEL = 2;
 
 		//modify the Dot properties
 		void setPosX(int px) {mPosX = px;}
@@ -36,6 +36,12 @@ class Dot
 		int getPosY() {return mPosY;}
 		int getVelX() {return mVelX;}
 		int getVelY() {return mVelY;}
+
+		//turn up the heat
+		void tempup();
+
+		//get temperature
+		int gettemp() {return temp;}
 
 		//Moves the dot
 		void move(const int width, const int height);
@@ -56,18 +62,8 @@ class Dot
 		int mVelX=0;
 		int mVelY=0;
 
-
-
+		//temperature
+		int temp{-80};
 };
-/*
-class Spaceship : public Asteroid
 
-{
-	public:
-			//Takes key presses and adjusts the dot's velocity
-		void handleEvent( SDL_Event& e );
-
-
-};
-*/
 #endif

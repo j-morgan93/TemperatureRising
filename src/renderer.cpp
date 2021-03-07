@@ -20,7 +20,7 @@ bool Renderer::init()
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		gWindow = SDL_CreateWindow( "F'd Up!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -54,13 +54,13 @@ bool Renderer::init()
 	return success;
 }
 
-bool Renderer::loadMedia(LTexture &gDotTexture)
+bool Renderer::loadMedia(std::string path,LTexture &gDotTexture)
 {
 	//Loading success flag
 	bool success = true;
 
 	//Load dot texture
-	if( !gDotTexture.loadFromFile( "/home/workspace/TemperatureRising/TemperatureRising/src/dot.bmp" , this->gRenderer) )
+	if( !gDotTexture.loadFromFile( path, this->gRenderer) )
 	{
 		printf( "Failed to load dot texture!\n" );
 		success = false;
@@ -92,7 +92,7 @@ void Renderer::Render(Dot const dot) {
   SDL_RenderClear(gRenderer);
 }
 
-bool Renderer::CheckCollision(SDL_Rect a, SDL_Rect b)
+bool Renderer::CheckCollision(Dot &a, Dot &b)
 {
 	//Construct tthe rectangle sides
 	int lA, lB;
@@ -101,16 +101,16 @@ bool Renderer::CheckCollision(SDL_Rect a, SDL_Rect b)
 	int bA, bB;
 
 	//define edges of A
-	lA = a.x;
-	rA = a.x + a.w;
-	tA = a.y;
-	bA =  a.y + a.h;
+	lA = a.Collider.x;
+	rA = a.Collider.x + a.Collider.w;
+	tA = a.Collider.y;
+	bA =  a.Collider.y + a.Collider.h;
 
 	//define edges of B
-	lB = b.x;
-	rB = b.x + b.w;
-	tB = b.y;
-	bB =  b.y + b.h;
+	lB = b.Collider.x;
+	rB = b.Collider.x + b.Collider.w;
+	tB = b.Collider.y;
+	bB =  b.Collider.y + b.Collider.h;
 
 	//checking for bouding boxes collision with the separating axis test(s).
 	if (lA >= rB) {return false;}
@@ -119,6 +119,26 @@ bool Renderer::CheckCollision(SDL_Rect a, SDL_Rect b)
 	if (tA >= bB) {return false;}
 
 	//std::cout<< "Collision! You F'd UP!" <<std::endl;
+	a.tempup();
+
 	return true;
 }
 
+//Updates the window title with vehicle temp and score
+/*
+void Renderer::UpdateTitle(int &a, int &t)
+{
+	std::string s = "Vehicle Temperature: "+std::to_string(a)+"F, Score: "+std::to_string(t);
+	int n = s.length();
+
+	char *carray[n+1];
+
+	std::strcpy(*carray, s.c_str());
+
+	const char title = &carray;
+
+	SDL_SetWindowTitle(gWindow, title);
+
+	return;
+}
+*/
