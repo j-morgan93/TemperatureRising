@@ -46,9 +46,9 @@ void Dot::move(const int width, const int height)
     Collider.y = mPosY;
 }
 
-void Dot::tempup()
+void Dot::tempUp()
 {
-    temp+= 15;
+    temp+= 30;
     std::cout << "We've F'd Up - the tempreature is now: " << temp << "°F!" <<std::endl;
 }
 

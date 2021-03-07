@@ -3,7 +3,7 @@
 
 #include<vector>
 #include "SDL.h"
-#include "ltimer.h" //not needed, yet!
+#include "ltimer.h"
 #include "ltexture.h"
 #include "renderer.h"
 
@@ -37,11 +37,11 @@ class Dot
 		int getVelX() {return mVelX;}
 		int getVelY() {return mVelY;}
 
-		//turn up the heat
-		void tempup();
+		//turn up the heat on temp :)
+		void tempUp();
 
 		//get temperature
-		int gettemp() {return temp;}
+		int getTemp() {return temp;}
 
 		//Moves the dot
 		void move(const int width, const int height);

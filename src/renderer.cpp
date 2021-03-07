@@ -119,7 +119,7 @@ bool Renderer::CheckCollision(Dot &a, Dot &b)
 	if (tA >= bB) {return false;}
 
 	//std::cout<< "Collision! You F'd UP!" <<std::endl;
-	a.tempup();
+	a.tempUp();
 
 	return true;
 }

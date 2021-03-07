@@ -14,6 +14,7 @@
 
 int main(int argc, char *args[])
 {
+	//Loading our textures and creating the Window-Renderer
 	LTexture gAstTexture;
 	LTexture gM2020Texture;
 	Renderer RenderObj;
@@ -25,8 +26,8 @@ int main(int argc, char *args[])
 	}
 	else
 	{
-		//Load media
-		if (!RenderObj.loadMedia("/home/workspace/TemperatureRising/TemperatureRising/src/asteroid.bmp" ,gAstTexture))
+		//Load media - you'll want to be careful of the load path.
+		if (!RenderObj.loadMedia("/home/workspace/TemperatureRising/TemperatureRising/src/asteroid.bmp",gAstTexture))
 		{
 			printf("Failed to load media!\n");
 		}
@@ -52,10 +53,13 @@ int main(int argc, char *args[])
 			//AstObj vector
 			std::vector<Dot> AstVec{};
 
+			//Controller initialization
+			Controller controller;
+
 			//While application is running
 			while (!Timer.getQuit())
 			{
-				Controller controller;
+			
 				//Handle events on queue
 				while (SDL_PollEvent(&e) != 0)
 				{
@@ -64,10 +68,11 @@ int main(int argc, char *args[])
 					{
 						Timer.setQuit();
 					}
-
+					
 					//Handle input for the dot
 					controller.handleEvent(e, dot);
 				}
+
 				//Loop for instantiating a bunch of Asteroids based on Max
 				if (AstVec.size() < Timer.getMax()) 
 				{
@@ -85,19 +90,18 @@ int main(int argc, char *args[])
 					AstVec[i].move(RenderObj.getScreenWidth(), RenderObj.getScreenHeight());
 				}
 
-				//check for out of bounds movement.
+				//Check for out of bounds movement.
 				std::vector<int> delv;
 				for (unsigned i = 0; i < AstVec.size(); i++)
 				{
 					if(AstVec[i].getPosY() >= RenderObj.SCREEN_HEIGHT -20) {
 						delv.push_back(i);
-						Timer.setscore();
+						Timer.setScore();
 					}
 
 					//Check for Collision
 					if (RenderObj.CheckCollision(dot, AstVec[i])) {
 						delv.push_back(i);
-						//std::cout << "We've F'd UP!" << std::endl;
 					}
 				}
 
@@ -120,17 +124,22 @@ int main(int argc, char *args[])
 
 				//Update screen
 				SDL_RenderPresent(RenderObj.gRenderer);
-			}
 
+				if (dot.getTemp() >= 250)
+				{
+					Timer.setQuit();
+					std::cout << "Too Hot - We've Failed!" <<std::endl;					
+				}
+				
+			}
+			//Display temperature and asteroids avoided
+			std::cout << "Final Temperature:  " << dot.getTemp() << " F , Score: " << Timer.getScore() << std::endl;
 		}
 	}
 
 	//Free resources and close SDL
 	RenderObj.close(gAstTexture);
 	RenderObj.close(gM2020Texture);
-
-	//Display temperature and asteroids avoided
-	std::cout << "Final Temperature: " << std::endl;
 
 	return 0;
 }
