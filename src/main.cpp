@@ -27,11 +27,11 @@ int main(int argc, char *args[])
 	else
 	{
 		//Load media - you'll want to be careful of the load path.
-		if (!RenderObj.loadMedia("/home/workspace/TemperatureRising/TemperatureRising/src/asteroid.bmp",gAstTexture))
+		if (!RenderObj.loadMedia("../src/asteroid.bmp",gAstTexture))
 		{
 			printf("Failed to load media!\n");
 		}
-		if (!RenderObj.loadMedia("/home/workspace/TemperatureRising/TemperatureRising/src/m2020_1.bmp" ,gM2020Texture))
+		if (!RenderObj.loadMedia("../src/m2020_1.bmp" ,gM2020Texture))
 		{
 			printf("Failed to load media!\n");
 		}
