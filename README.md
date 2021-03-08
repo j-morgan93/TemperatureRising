@@ -13,7 +13,7 @@ This game - F'd Up! - is a key-board interactive space game in which you control
 * ltimer: game-timers and game-state variables ar held within this object
 * renderer: the game window, rending, and collision are contained within this class
 
-- the asteroid.bmp and m2020_1.bmp are custom files that are loaded into memory and rendered for each object of dot-class. The path fors this files is given as `/home/workspace/TemperatureRising/TemperatureRising/src/asteroid.bmp`
+- the asteroid.bmp and m2020_1.bmp are custom files that are loaded into memory and rendered for each object of dot-class. The path fors this files is given as `../src/asteroid.bmp`
 
 ## Project Rubric Satisfaction - 5 minimum needed.
 1. The game makes use of 5 distinct classes, as denoted above.
